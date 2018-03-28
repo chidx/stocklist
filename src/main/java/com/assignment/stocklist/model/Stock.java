@@ -12,8 +12,8 @@ import lombok.ToString;
 
 @Entity
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @ToString
 public class Stock {
 
@@ -23,4 +23,10 @@ public class Stock {
     private String name;
     private Float currentPrice;
     private Long lastUpdate;
+
+    public Stock(String name, Float currentPrice, Long lastUpdate) {
+        this.name = name;
+        this.currentPrice = currentPrice;
+        this.lastUpdate = lastUpdate;
+    }
 }
