@@ -1,0 +1,109 @@
+<section class="main">
+  <div class="card">
+    <div class="card-header">
+      <button type="button" class="btn btn-outline-primary float-right" (click)="openModal()">Add Stocks</button>
+    </div>
+    <div class="card-body">
+      <table class="table">
+        <thead>
+        <tr>
+          <th class="col-sm-4 text-center">Name</th>
+          <th class="col-sm-4 text-center">Current Price</th>
+          <th class="col-sm-4 text-center">Last Update</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let stockItem of stocks"
+            (click)="onSelect(stockItem)"
+            [class.selected]="stockItem === selectedStock">
+          <td class="col-sm-4 text-center">{{stockItem.name}}</td>
+          <td class="col-sm-4 text-center">{{stockItem.currentPrice}}</td>
+          <td class="col-sm-4 text-center">{{stockItem.lastUpdate | date:'yyyy-MM-dd HH:mm:ss a z':'+0700'}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="backdrop" [ngStyle]="{'display':display}"></div>
+  <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display}">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title text-center">Add New Stock</h4>
+          <button type="button" class="close" aria-label="Close" (click)="onCloseHandled()"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="modal-body">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="stockName-title">Stock Name</span>
+            </div>
+            <input type="text" class="form-control" [(ngModel)]="stock.name" placeholder="Stock Name" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="stockPrice-title">Stock Price</span>
+            </div>
+            <input type="text" class="form-control" [(ngModel)]="stock.currentPrice" placeholder="Stock Price" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-warning" (click)="onCloseHandled()">Cancel</button>
+          <button type="button" class="btn btn-outline-primary" (click)="addStock(stock)">Create</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="details">
+  <div class="card" *ngIf="selectedStock">
+    <div class="card-header">
+      <div class="row">
+        <div class="col-sm-2 offset-sm-5">
+          <h2>{{selectedStock.name}}</h2>
+        </div>
+        <div class="col-sm-5">
+          <button type="button" class="btn btn-outline-primary float-right" (click)="openPriceModal()">Update Price</button>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <table class="table">
+        <thead>
+        <tr>
+          <th class="col-sm-4 text-center">Price</th>
+          <th class="col-sm-4 text-center">Last Update</th>
+        </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let price of selectedStock.prices">
+            <td class="col-sm-4 text-center">{{price.price}}</td>
+            <td class="col-sm-4 text-center">{{price.timestamp | date:'yyyy-MM-dd HH:mm:ss a z':'+0700'}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="backdrop" [ngStyle]="{'display':selectedDisplay}"></div>
+  <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':selectedDisplay}">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title text-center">Update Stock Price</h4>
+          <button type="button" class="close" aria-label="Close" (click)="onPriceCloseHandled()"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="modal-body">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="updatePrice-title">New Stock Price</span>
+            </div>
+            <input type="text" class="form-control" [(ngModel)]="selectedPrice.price" placeholder="Stock Price" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-warning" (click)="onPriceCloseHandled()">Cancel</button>
+          <button type="button" class="btn btn-outline-primary" (click)="updatePrice()">Create</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
