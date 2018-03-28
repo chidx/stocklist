@@ -13,6 +13,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
@@ -21,12 +22,14 @@ import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 import static org.springframework.http.HttpStatus.OK;
 
 @RunWith(SpringRunner.class)
+@ActiveProfiles("test")
 public class StockControllerTest {
 
     private static final int ZERO = 0;
@@ -141,7 +144,20 @@ public class StockControllerTest {
 
     @Test
     public void updateStock_returnSuccess() {
+        Stock updatedStock = new Stock();
+        updatedStock.setCurrentPrice(STOCK_PRICE);
+        Stock oldStock = updatedStock;
+        oldStock.setCurrentPrice(STOCK_PRICE - 2F);
+        Optional<Stock> oldStockOptional = Optional.of(oldStock);
+        PriceHistory priceHistory = new PriceHistory();
 
+        when(stockRepository.findById(STOCK_ID)).thenReturn(oldStockOptional);
+        when(priceHistoryRepository.save(any(PriceHistory.class))).thenReturn(priceHistory);
+        when(stockRepository.save(oldStock)).thenReturn(oldStock);
+
+        ResponseEntity<Stock> responseEntity = stockController.updateStock(STOCK_ID, updatedStock);
+        assertEquals(OK, responseEntity.getStatusCode());
+        assertEquals(updatedStock.getCurrentPrice(), responseEntity.getBody().getCurrentPrice());
     }
 
     @Test
