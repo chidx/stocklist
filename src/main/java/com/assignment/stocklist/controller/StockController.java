@@ -85,7 +85,7 @@ public class StockController {
             stock.setCurrentPrice(updatedStock.getCurrentPrice());
             stock.setLastUpdate(System.currentTimeMillis());
             Stock saved = stockRepository.save(stock);
-            log.info("Stock with id {} is successfully updated");
+            log.info("Stock with id {} is successfully updated", stockId);
             return ResponseEntity.ok(saved);
         }).orElseGet(() -> {
             log.debug("[Update Stock] Stock with id {} is not found", stockId);
