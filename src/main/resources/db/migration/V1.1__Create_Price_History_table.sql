@@ -1,0 +1,6 @@
+CREATE TABLE IF NOT EXISTS `price_history` (
+  `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `stock_id` INT NOT NULL,
+  `price` FLOAT NOT NULL,
+  `timestamp` BIGINT NOT NULL
+);

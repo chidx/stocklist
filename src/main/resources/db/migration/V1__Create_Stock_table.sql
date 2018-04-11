@@ -1,0 +1,6 @@
+CREATE TABLE IF NOT EXISTS `stock` (
+  `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `name` VARCHAR(255) NOT NULL,
+  `current_price` FLOAT NOT NULL,
+  `last_update` BIGINT NOT NULL
+);
