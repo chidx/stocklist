@@ -29,7 +29,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .and()
             .authorizeRequests()
             .antMatchers("/api/stocks/**").hasRole("USER")
-            .anyRequest().authenticated().and().httpBasic();
+            .antMatchers("/graphql/**").permitAll()
+            .antMatchers("/graphiql").permitAll()
+            .anyRequest().authenticated()
+            .and().httpBasic();
     }
 
     @Autowired

@@ -1,18 +1,7 @@
 package com.assignment.stocklist;
 
-import com.assignment.stocklist.model.PriceHistory;
-import com.assignment.stocklist.model.Stock;
-import com.assignment.stocklist.repository.PriceHistoryRepository;
-import com.assignment.stocklist.repository.StockRepository;
-
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Profile;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -24,7 +13,7 @@ public class StocklistApplication {
 		SpringApplication.run(StocklistApplication.class, args);
 	}
 
-	@Bean
+	/*@Bean
 	@Profile("!test")
 	public CommandLineRunner initStockData(StockRepository stockRepository,
 		PriceHistoryRepository priceHistoryRepository) {
@@ -59,5 +48,5 @@ public class StocklistApplication {
 		stock.setCurrentPrice(stock.getCurrentPrice() + value);
 		stock.setLastUpdate(System.currentTimeMillis());
 		return stockRepository.save(stock);
-	}
+	}*/
 }
