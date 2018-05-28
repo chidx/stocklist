@@ -36,7 +36,7 @@ dependencies {
 	compile("org.springframework.boot:spring-boot-starter-actuator")
 	compile('org.flywaydb:flyway-core')
 	compile("io.leangen.graphql:spqr:0.9.7")
-    compile('io.leangen.graphql:graphql-spqr-spring-boot-starter:0.0.1')
+//    compile('io.leangen.graphql:graphql-spqr-spring-boot-starter:0.0.1')
 	compile("io.reactivex.rxjava2:rxjava:2.1.5")
 	compile("io.projectreactor:reactor-core:3.1.7.RELEASE")
 	compileOnly('org.projectlombok:lombok')

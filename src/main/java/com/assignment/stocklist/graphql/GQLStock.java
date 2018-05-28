@@ -2,6 +2,8 @@ package com.assignment.stocklist.graphql;
 
 import com.assignment.stocklist.model.Stock;
 
+import org.springframework.stereotype.Component;
+
 import java.util.List;
 
 import io.leangen.graphql.annotations.GraphQLQuery;
@@ -42,5 +44,18 @@ public class GQLStock extends Stock {
     @GraphQLQuery(name = "priceHistory", description = "Price History")
     public List<GQLPriceHistory> getPriceHistories() {
         return priceHistories;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder(getId().toString())
+            .append(" " + getName())
+            .append(" " + getCurrentPrice().toString())
+            .append(" " + getLastUpdateAt());
+        getPriceHistories().forEach(price -> {
+            sb.append(" " + price.getPrice());
+            sb.append(" " + price.getTimestampAt());
+        });
+        return sb.toString();
     }
 }

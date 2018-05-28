@@ -2,6 +2,7 @@ package com.assignment.stocklist.graphql;
 
 import io.leangen.graphql.annotations.GraphQLQuery;
 import lombok.AllArgsConstructor;
+import lombok.NonNull;
 
 @AllArgsConstructor
 public class GQLSubscriptionPayload {

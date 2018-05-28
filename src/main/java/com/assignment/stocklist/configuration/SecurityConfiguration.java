@@ -31,6 +31,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers("/api/stocks/**").hasRole("USER")
             .antMatchers("/graphql/**").permitAll()
             .antMatchers("/graphiql").permitAll()
+            .antMatchers("/**").permitAll()
+            .antMatchers("/subscription-example").permitAll()
+            .antMatchers("/subscriptions/websocket").permitAll()
             .anyRequest().authenticated()
             .and().httpBasic();
     }

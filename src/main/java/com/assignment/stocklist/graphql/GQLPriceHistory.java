@@ -2,6 +2,8 @@ package com.assignment.stocklist.graphql;
 
 import com.assignment.stocklist.model.PriceHistory;
 
+import org.springframework.stereotype.Component;
+
 import io.leangen.graphql.annotations.GraphQLQuery;
 
 public class GQLPriceHistory extends PriceHistory {
