@@ -1,0 +1,45 @@
+schema {
+    query: Query
+    mutation: Mutation
+    subscription: Subscription
+}
+
+type PriceHistory {
+    id: ID!
+    stockId: Int!
+    price: Float!
+    timestampAt: String!
+}
+
+type Stock {
+    id: ID!
+    name: String!
+    currentPrice: Float!
+    lastUpdateAt: String!
+    priceHistory: [PriceHistory]!
+}
+
+type Query {
+    stocks: [Stock]!
+    stock(name: String!): Stock
+    login(credentials: GQLCredentialsInput!): String
+}
+
+type Mutation {
+    addStock(name: String!, price: Float!): Stock!
+    updatePrice(id: ID!, price: Float): Stock!
+}
+
+type Subscription {
+    stockSubscription(status: String!): GQLSubscriptionPayload!
+}
+
+type GQLSubscriptionPayload {
+    previousValue: Stock
+    newValue: Stock
+}
+
+input GQLCredentialsInput {
+    username: String!
+    password: String!
+}
